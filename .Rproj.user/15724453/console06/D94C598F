@@ -1,96 +1,0 @@
-[0m[0KMicrosoft Windows [Version 10.0.17134.285][0K[?25l
-(c) 2018 Microsoft Corporation. All rights reserved.[0K
-[0K
-C:\Users\andre\Documents\Linear.reg>[0K[?25h[?25l
-C:\Users\andre\Documents\Linear.reg>[0K[?25h^A[0K[?25lC:\Users\andre\Documents\Linear.reg>[0K[?25h[?25l
-C:\Users\andre\Documents\Linear.reg>[0K[?25hg[0Ki[0Kt[0K[?25l
-[0K[?25h]0;  - gitusage: git [--version] [--help] [-C <path>] [-c <name[0K>[?25l
-=<value>][0K
-           [--exec-path[=<path>]] [--html-path] [--ma[0Kn
--path] [--info-path][0K
-           [-p | --paginate | -P | --no-pager] [--no-[0Kr
-eplace-objects] [--bare][0K
-           [--git-dir=<path>] [--work-tree=<path>] [-[0K-
-namespace=<name>][0K
-           <command> [<args>][0K
-[0K
-These are common Git commands used in various situati[0Ko
-ns:[0K
-[0K
-start a working area (see also: git help tutorial)[0K
-   clone      Clone a repository into a new directory[0K
-   init       Create an empty Git repository or reini[0Kt
-ialize an existing one[0K
-[0K
-work on the current change (see also: git help everyd[0Ka
-y)[0K
-   add        Add file contents to the index[0K
-   mv         Move or rename a file, a directory, or [0Ka
- symlink[0K
-   reset      Reset current HEAD to the specified sta[0Kt
-e[0K
-   rm         Remove files from the working tree and [0Kf
-rom the index[0K
-[0K
-examine the history and state (see also: git help rev[0Ki
-sions)[0K
-   bisect     Use binary search to find the commit th[0Ka
-t introduced a bug[0K
-   grep       Print lines matching a pattern[0K
-   log        Show commit logs[0K
-   show       Show various types of objects[0K
-   status     Show the working tree status[0K
-[0K
-grow, mark and tweak your common history[0K
-   branch     List, create, or delete branches[0K
-   checkout   Switch branches or restore working tree[0K
-files[0K
-   commit     Record changes to the repository[0K
-   diff       Show changes between commits, commit an[0Kd
- working tree, etc[0K
-   merge      Join two or more development histories [0Kt
-ogether[0K
-   rebase     Reapply commits on top of another base [0Kt
-ip[0K
-   tag        Create, list, delete or verify a tag ob[0Kj
-ect signed with GPG[0K
-[0K
-collaborate (see also: git help workflows)[0K
-   fetch      Download objects and refs from another [0Kr
-epository[0K
-   pull       Fetch from and integrate with another r[0Ke
-pository or a local branch[0K
-   push       Update remote refs along with associate[0Kd
- objects[0K
-[0K
-'git help -a' and 'git help -g' list available subcom[0Km
-ands and some[0K
-concept guides. See 'git help <command>' or 'git help[0K
-<concept>'[0K
-to read about a specific subcommand or concept.[0K
-[0K[?25h]0; [?25l
-C:\Users\andre\Documents\Linear.reg>[0K[?25hg[0Ki[0Kt[0K[41G[?25lC:\Users\andre\Documents\Linear.reg>git i[0K[?25hn[0K[44G[43G[?25lC:\Users\andre\Documents\Linear.reg>git i[0K[?25hm[0K[?25lC:\Users\andre\Documents\Linear.reg>git i[0K[?25hn[0Ki[0Kt[0K[?25l
-[0K[?25h]0;  - git  init[?25lInitialized empty Git repository in C:/Users/andre/Do[0Kc[1G[?25h]0; [?25l
-uments/Linear.reg/.git/[0K
-[0K
-C:\Users\andre\Documents\Linear.reg>[0K[?25hg[0Ki[0Kt[0K[41G[?25lC:\Users\andre\Documents\Linear.reg>git s[0K[?25ht[0Ka[0Kt[0Ku[0Ks[0K]0;  - git  status[?25l
-[0K[?25hOn branch master[0K[?25l
-[0K
-No commits yet[0K
-[0K
-Untracked files:[0K
-  (use "git add <file>..." to include in what will be[0K
-committed)[0K
-[0K
-        [0;31m.Rbuildignore[0m[0K
-        [0;31m.Rproj.user/[0m[0K
-        [0;31mDESCRIPTION[0m[0K
-        [0;31mLinear.reg.Rproj[0m[0K
-        [0;31mNAMESPACE[0m[0K
-        [0;31mR/[0m[0K
-        [0;31mman/[0m[0K
-[0K
-nothing added to commit but untracked files present ([0Ku
-se "git add" to track)[0K
-[0K[?25h]0; [?25l
-C:\Users\andre\Documents\Linear.reg>[0K[?25hc[0K[?25lC:\Users\andre\Documents\Linear.reg>[0K[?25hg[0Ko[0Kt[0K[41G[40G[?25lC:\Users\andre\Documents\Linear.reg>go[0K[?25h[?25lC:\Users\andre\Documents\Linear.reg>g[0K[?25hi[0Kt[0K[41G[?25lC:\Users\andre\Documents\Linear.reg>git a[0K[?25hd[0Kd[0K[45G[?25lC:\Users\andre\Documents\Linear.reg>git add =[0K[?25h[?25lC:\Users\andre\Documents\Linear.reg>git add[0K[45G[?25h[?25lC:\Users\andre\Documents\Linear.reg>git add -[0K[?25hA[0K
