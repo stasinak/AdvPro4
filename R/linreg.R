@@ -8,8 +8,8 @@ linreg <- setRefClass("linreg",
      n="numeric",
      p="numeric",
      df="numeric",
-     resid_var="vector",
-     var_beta="vector",
+     resid_var="numeric",
+     var_beta="matrix",
      t_val="vector"
      ),
     methods = list(
@@ -23,9 +23,10 @@ linreg <- setRefClass("linreg",
        n<<-NROW(X)   # Number of data
        p<<-NCOL(X)   # Number of variables
        df<<-n-p   # Degrees of freedom
-       resid_var<<-(t(resid_e)%*%resid_e)/df  # Estimates of the variance of the error variable
+       resid_var<<-as.numeric((t(resid_e)%*%resid_e)/df)  # Estimates of the variance of the error variable
        var_beta<<-resid_var*solve(t(X)%*%X)  # Estimates the variability of the beta coefficients
-       t_val<<-reg_coe/sqrt(var_beta)   # T-values for significance of coefficients
+       t_val<<-reg_coe/sqrt(diag(var_beta))   # T-values for significance of coefficients
+       print(t_val)
        },
       print_out = function(){
         print(reg_coe)
@@ -33,18 +34,44 @@ linreg <- setRefClass("linreg",
       },
       plot = function(){
         require(ggplot2)
-        data_plot <- data.frame(fit_val, resid_e, sqrt(resid_e/sd(resid_e)))
-        ggplot(data_plot, aes(x=fit_val, y=resid_e)) +
-          geom_point() +
+        data_plot <- data.frame(fit_val, resid_e, stand_res = sqrt(abs(resid_e/sd(resid_e))))
+        p1 <- ggplot(data_plot, aes(x=fit_val, y=resid_e)) +
+          geom_point(shape = 1) +
+          geom_smooth(se = FALSE) +
           ggtitle("Residual vs Fitted") +
-          xlab("Fitted values") +
+          xlab(paste("Fitted values",")", sep = "")) +
           ylab("Residuals") +
           theme_light()
+        p2 = ggplot(data_plot, aes(x=fit_val, y=stand_res)) +
+          geom_point(shape = 1) +
+          geom_smooth(se = FALSE) +
+          ggtitle("Scale - Location") +
+          xlab(paste("Fitted values",")", sep = "")) +
+          ylab("Residuals") +
+          theme_light()
+        readline(prompt = "Press <Return> to see next plot:")
+        print(p1)
+        readline(prompt = "Press <Return> to see next plot:")
+        print(p2)
+      },
+      resid = function(){
+        return(resid_e)
+      },
+      pred = function(){
+        return(fit_val)
+      },
+      coef = function(){
+        return(reg_coe)
+      },
+      summary = function(){
+
       }
       ))
 
 #data("iris")
-linear_test <- linreg$new(Petal.Length~Sepal.Width+Sepal.Length, iris)
+linear_test <- linreg$new(Petal.Length~Species, iris)
 
+linear_test <- linreg$new(Sepal.Length~Sepal.Width, iris)
 linear_test$print_out()
+linear_test$plot()
 
