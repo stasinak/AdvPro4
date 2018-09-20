@@ -5,6 +5,8 @@ linreg <- setRefClass("linreg",
      reg_coe="vector",
      fit_val="vector",
      resid_e="vector",
+     n="numeric",
+     p="numeric",
      df="numeric",
      resid_var="vector",
      var_beta="vector",
@@ -13,19 +15,21 @@ linreg <- setRefClass("linreg",
     methods = list(
       initialize = function(formula,data){
        X<<-model.matrix(formula,data)  # X, matrix containing all the data
-       Y<<-data[all.vars(formula)[1]]  # Y, vector containing response variable
+       Y<<-as.matrix(data[all.vars(formula)[1]])  # Y, vector containing response variable
        reg_coe<<-solve((t(X)%*%X))%*%t(X)%*%Y  # Estimation of the regression coefficients
+       names(reg_coe) <<- colnames(X)
        fit_val<<-X%*%reg_coe  # Estimation of the Y values
        resid_e<<-Y-fit_val  # Estimation of the error variable
        n<<-NROW(X)   # Number of data
        p<<-NCOL(X)   # Number of variables
        df<<-n-p   # Degrees of freedom
        resid_var<<-(t(resid_e)%*%resid_e)/df  # Estimates of the variance of the error variable
-       var_beta<<-sigma_hat*solve(t(X)%*%X)  # Estimates the variability of the beta coefficients
+       var_beta<<-resid_var*solve(t(X)%*%X)  # Estimates the variability of the beta coefficients
        t_val<<-reg_coe/sqrt(var_beta)   # T-values for significance of coefficients
        },
       print_out = function(){
-        cat()
+        print(reg_coe)
+        #cat(reg_coe, labels = T)
       },
       plot = function(){
         require(ggplot2)
@@ -39,5 +43,8 @@ linreg <- setRefClass("linreg",
       }
       ))
 
-lin<-linreg$print_out()
+#data("iris")
+linear_test <- linreg$new(Petal.Length~Sepal.Width+Sepal.Length, iris)
+
+linear_test$print_out()
 
