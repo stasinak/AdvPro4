@@ -5,7 +5,7 @@ linreg <- setRefClass("linreg",
      reg_coe="vector",
      fit_val="vector",
      resid_e="vector",
-     deg_freed="numeric",
+     df="numeric",
      resid_var="vector",
      var_beta="vector",
      t_val="vector"
@@ -20,12 +20,22 @@ linreg <- setRefClass("linreg",
        n<<-NROW(X)   # Number of data
        p<<-NCOL(X)   # Number of variables
        df<<-n-p   # Degrees of freedom
-       sigma_hat<<-(t(resid_e)%*%resid_e)/df  # Estimates of the variance of the error variable
+       resid_var<<-(t(resid_e)%*%resid_e)/df  # Estimates of the variance of the error variable
        var_beta<<-sigma_hat*solve(t(X)%*%X)  # Estimates the variability of the beta coefficients
-       t_values<<-reg_coe/sqrt(var_beta)   # T-values for significance of coefficients
+       t_val<<-reg_coe/sqrt(var_beta)   # T-values for significance of coefficients
        },
       print_out = function(){
         cat()
+      },
+      plot = function(){
+        require(ggplot2)
+        data_plot <- data.frame(fit_val, resid_e, sqrt(resid_e/sd(resid_e)))
+        ggplot(data_plot, aes(x=fit_val, y=resid_e)) +
+          geom_point() +
+          ggtitle("Residual vs Fitted") +
+          xlab("Fitted values") +
+          ylab("Residuals") +
+          theme_light()
       }
       ))
 
