@@ -32,6 +32,10 @@ Title
 \item{\code{var_beta}}{matrix.}
 
 \item{\code{t_val}}{vector.}
+
+\item{\code{formula}}{.}
+
+\item{\code{data}}{.}
 }}
 
 
