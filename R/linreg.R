@@ -1,3 +1,21 @@
+#' Title
+#'
+#' @field X matrix.
+#' @field Y matrix.
+#' @field reg_coe vector.
+#' @field fit_val vector.
+#' @field resid_e vector.
+#' @field n numeric.
+#' @field p numeric.
+#' @field df numeric.
+#' @field resid_var numeric.
+#' @field var_beta matrix.
+#' @field t_val vector.
+#'
+#' @return
+#' @export
+#'
+#' @examples
 linreg <- setRefClass("linreg",
    fields = list(
      X="matrix",
@@ -26,7 +44,7 @@ linreg <- setRefClass("linreg",
        resid_var<<-as.numeric((t(resid_e)%*%resid_e)/df)  # Estimates of the variance of the error variable
        var_beta<<-resid_var*solve(t(X)%*%X)  # Estimates the variability of the beta coefficients
        t_val<<-reg_coe/sqrt(diag(var_beta))   # T-values for significance of coefficients
-       print(t_val)
+       print(df)
        },
       print_out = function(){
         print(reg_coe)
@@ -64,14 +82,24 @@ linreg <- setRefClass("linreg",
         return(reg_coe)
       },
       summary = function(){
-
+        l <- list()
+        m = matrix(NA,p,4)
+        m[,1] = reg_coe
+        m[,2] = sqrt(diag(var_beta)/n)
+        m[,3] = t_val
+        m[,4] = pt(t_val, df)
+        colnames(m) <- c("Estimate", "Std. Error", "t value", "Pr(>|t|)")
+        rownames(m) <- colnames(X)
+        l$matrix <- m
+        l$variance <- resid_var
+        return(l)
       }
       ))
 
 #data("iris")
-linear_test <- linreg$new(Petal.Length~Species, iris)
+#linear_test <- linreg$new(Petal.Length~Species, iris)
 
-linear_test <- linreg$new(Sepal.Length~Sepal.Width, iris)
-linear_test$print_out()
-linear_test$plot()
-
+# linear_test <- linreg$new(Sepal.Length~Sepal.Width, iris)
+# linear_test$print_out()
+# linear_test$plot()
+# linear_test$summary()
