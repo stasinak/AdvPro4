@@ -101,7 +101,7 @@ linreg <-setRefClass("linreg",
         rownames(m) <- colnames(X)
         l$matrix <- m
         l$variance <- resid_var
-        return(l)
+        cat(l)
       }
       ))
 
