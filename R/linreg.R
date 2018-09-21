@@ -52,6 +52,9 @@ linreg <-setRefClass("linreg",
         ,
       print_out = function(){
         cat("call:","\n")
+        cat("formula=",paste0(formula),", data=","\n")
+        cat("coefficients:","\n")
+        cat(paste0(reg_coe))
 
         #cat(reg_coe, labels = T)
       },
@@ -84,6 +87,7 @@ linreg <-setRefClass("linreg",
         return(fit_val)
       },
       coef = function(){
+
         return(reg_coe)
       },
       summary = function(){
@@ -100,6 +104,5 @@ linreg <-setRefClass("linreg",
         return(l)
       }
       ))
-
 
 
