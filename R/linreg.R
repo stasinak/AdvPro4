@@ -16,8 +16,10 @@
 #' @export
 #'
 #' @examples
-linreg <- setRefClass("linreg",
+linreg <-setRefClass("linreg",
    fields = list(
+     formula="formula",
+     data = "data.frame",
      X="matrix",
      Y="matrix",
      reg_coe="vector",
@@ -31,8 +33,9 @@ linreg <- setRefClass("linreg",
      t_val="vector"
      ),
     methods = list(
-      initialize = function(formula,data){
-        if(class(formula)=="formula" & class(data)=="data.frame") {
+      initialize = function(formula, data){
+          formula<<-formula
+          data<<-data
           X<<-model.matrix(formula,data)  # X, matrix containing all the data
           Y<<-as.matrix(data[all.vars(formula)[1]])  # Y, vector containing response variable
           reg_coe<<-solve((t(X)%*%X))%*%t(X)%*%Y  # Estimation of the regression coefficients
@@ -46,10 +49,10 @@ linreg <- setRefClass("linreg",
           var_beta<<-resid_var*solve(t(X)%*%X)  # Estimates the variability of the beta coefficients
           t_val<<-reg_coe/sqrt(diag(var_beta))   # T-values for significance of coefficients
         }
-        else stop("Wrong input!\n")
-      },
+        ,
       print_out = function(){
-        print(reg_coe)
+        cat("call:","\n")
+
         #cat(reg_coe, labels = T)
       },
       plot = function(){
@@ -98,10 +101,5 @@ linreg <- setRefClass("linreg",
       }
       ))
 
-#data("iris")
-linear_test <- linreg$new(Petal.Length~Species, data=iris)
 
-# linear_test <- linreg$new(Sepal.Length~Sepal.Width, iris)
-# linear_test$print_out()
-# linear_test$plot()
-# linear_test$summary()
+
