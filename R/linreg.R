@@ -54,8 +54,8 @@ linreg <-setRefClass("linreg",
         ,
       print = function(){
         cat("call:","\n")
-        cat(paste0("lm(formula = ", all.vars(formula)[1], " ~ ",
-                   paste(all.vars(formula)[-1], sep = " + "), ", data = ", dname," )", sep = ""),"\n")
+        cat(paste0("linreg(formula = ", all.vars(formula)[1], " ~ ",
+                   paste(all.vars(formula)[-1], sep = " + "), ", data = ", dname,")", sep = ""),"\n")
         cat("coefficients:","\n")
         cat(format(labels(reg_coe), width=25, justify = "right"), "\n")
         cat(format(reg_coe, width=25, justify = "right"))
