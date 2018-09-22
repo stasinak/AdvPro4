@@ -70,27 +70,24 @@ linreg <-setRefClass("linreg",
       plot = function(){
         require(ggplot2)
         data_plot <- data.frame(fit_val, resid_e, stand_res = sqrt(abs(resid_e/sd(resid_e))))
-        p1 = ggplot(data_plot, aes(x=fit_val, y=resid_e)) +
-          geom_point(shape = 1) +
-          geom_smooth(se = FALSE, color = "red") +
-          ggtitle("Residual vs Fitted") +
-          xlab(paste0("Fitted values\nlm( ", all.vars(formula)[1], " ~ ",
-                      paste(all.vars(formula)[-1], sep = " + "), " )", sep = "")) +
-          ylab("Residuals") +
-          theme_light()
-        p2 = ggplot(data_plot, aes(x=fit_val, y=stand_res)) +
-          geom_point(shape = 1) +
-          geom_smooth(se = FALSE, color = "red") +
-          ggtitle("Scale - Location") +
-          xlab(paste0("Fitted values\nlm( ", all.vars(formula)[1], " ~ ",
-                      paste(all.vars(formula)[-1], sep = " + "), " )", sep = "")) +
-          ylab(expression(sqrt("|Standardize residuals|"))) +
-          theme_light()
-        readline(prompt = "Press <Return> to see next plot:")
-        print(p1)
-        readline(prompt = "Press <Return> to see next plot:")
-        print(p2)
-      },
+        p1 = suppressMessages(ggplot(data_plot, aes(x=fit_val, y=resid_e)) +
+                                geom_point(shape = 1) +
+                                geom_smooth(se = FALSE, color = "red") +
+                                ggtitle("Residual vs Fitted") +
+                                xlab(paste0("Fitted values\nlm( ", all.vars(formula)[1], " ~ ",
+                                            paste(all.vars(formula)[-1], sep = " + "), " )", sep = "")) +
+                                ylab("Residuals") +
+                                theme_light())
+        p2 = suppressMessages(ggplot(data_plot, aes(x=fit_val, y=stand_res)) +
+                                geom_point(shape = 1) +
+                                geom_smooth(se = FALSE, color = "red") +
+                                ggtitle("Scale - Location") +
+                                xlab(paste0("Fitted values\nlm( ", all.vars(formula)[1], " ~ ",
+                                            paste(all.vars(formula)[-1], sep = " + "), " )", sep = "")) +
+                                ylab(expression(sqrt("|Standardize residuals|"))) +
+                                theme_light())
+        suppressMessages(list(p1,p2))
+      }
       resid = function(){
         return(resid_e)
       },
@@ -105,14 +102,30 @@ linreg <-setRefClass("linreg",
         l <- list()
         m = matrix(NA,p,4)
         m[,1] = reg_coe
-        m[,2] = sqrt(diag(var_beta)/n)
+        m[,2] = sqrt(diag(var_beta))
         m[,3] = t_val
-        m[,4] = pt(t_val, df)
+        m[,4] = (1-pt(t_val, df))*2
         colnames(m) <- c("Estimate", "Std. Error", "t value", "Pr(>|t|)")
         rownames(m) <- colnames(X)
         l$matrix <- m
         l$variance <- resid_var
-        cat(l)
+        cat(format("",width = 12))
+        cat(format(colnames(m), width=20, justify="right"),'\n')
+        for(i in 1:nrow(m)){
+          cat(format(rownames(m)[i], width = 12, justify = "left"))
+          if(m[i,4]<0.001)
+            cat(format(round(m[i,], digits = 5), width=20, justify="right", scientific = F), format("***", width=20, justify="left"), '\n')
+          else if(m[i,4]<0.01)
+            cat(format(round(m[i,], digits = 5), width=20, justify="right", scientific = F),format("**", width=20, justify="left"),'\n')
+          else if(m[i,4]<0.05)
+            cat(format(round(m[i,], digits = 5), width=20, justify="right", scientific = F),format("*", width=20, justify="left"),'\n')
+          else if(m[i,4]<0.1)
+            cat(format(round(m[i,], digits = 5), width=20, justify="right", scientific = F),format(".", width=20, justify="left"),'\n')
+          else
+            cat(format(round(m[i,], digits = 5), width=20, justify="right", scientific = F),format(" ", width=20, justify="left"),'\n')
+            
+        }
+        cat("Residual standard error:", round(sqrt(resid_var), 3), "on", df, "degrees of freedom")
       }
       ))
 
