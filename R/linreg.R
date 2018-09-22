@@ -20,6 +20,7 @@ linreg <-setRefClass("linreg",
    fields = list(
      formula="formula",
      data = "data.frame",
+     dname = "vector",
      X="matrix",
      Y="matrix",
      reg_coe="vector",
@@ -48,13 +49,17 @@ linreg <-setRefClass("linreg",
           resid_var<<-as.numeric((t(resid_e)%*%resid_e)/df)  # Estimates of the variance of the error variable
           var_beta<<-resid_var*solve(t(X)%*%X)  # Estimates the variability of the beta coefficients
           t_val<<-reg_coe/sqrt(diag(var_beta))   # T-values for significance of coefficients
+          dname <<- deparse(substitute(data))
         }
         ,
-      print_out = function(){
+      print = function(){
         cat("call:","\n")
-        cat("formula=",paste0(formula),", data=","\n")
+        cat(paste0("lm(formula = ", all.vars(formula)[1], " ~ ",
+                   paste(all.vars(formula)[-1], sep = " + "), ", data = ", dname," )", sep = ""),"\n")
         cat("coefficients:","\n")
-        cat(paste0(reg_coe))
+        cat(format(labels(reg_coe), width=25, justify = "right"), "\n")
+        cat(format(reg_coe, width=25, justify = "right"))
+
 
         #cat(reg_coe, labels = T)
       },
