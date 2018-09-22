@@ -54,8 +54,12 @@ linreg <-setRefClass("linreg",
         ,
       print = function(){
         cat("call:","\n")
-        cat(paste0("linreg(formula = ", all.vars(formula)[1], " ~ ",
-                   paste(all.vars(formula)[-1], sep = " + "), ", data = ", dname,")", sep = ""),"\n")
+        right_formula = paste(all.vars(formula)[-1], collapse = " + ")
+        cat("linreg(formula = ", all.vars(formula)[1], " ~ ", right_formula,
+                   ", data = ", dname,")", "\n", sep ="")
+
+        #cat(all.vars(formula)[1], " ~ ", paste(all.vars(formula)[-1],sep="+"),"\n")
+
         cat("coefficients:","\n")
         cat(format(labels(reg_coe), width=25, justify = "right"), "\n")
         cat(format(reg_coe, width=25, justify = "right"))
@@ -66,19 +70,21 @@ linreg <-setRefClass("linreg",
       plot = function(){
         require(ggplot2)
         data_plot <- data.frame(fit_val, resid_e, stand_res = sqrt(abs(resid_e/sd(resid_e))))
-        p1 <- ggplot(data_plot, aes(x=fit_val, y=resid_e)) +
+        p1 = ggplot(data_plot, aes(x=fit_val, y=resid_e)) +
           geom_point(shape = 1) +
-          geom_smooth(se = FALSE) +
+          geom_smooth(se = FALSE, color = "red") +
           ggtitle("Residual vs Fitted") +
-          xlab(paste("Fitted values",")", sep = "")) +
+          xlab(paste0("Fitted values\nlm( ", all.vars(formula)[1], " ~ ",
+                      paste(all.vars(formula)[-1], sep = " + "), " )", sep = "")) +
           ylab("Residuals") +
           theme_light()
         p2 = ggplot(data_plot, aes(x=fit_val, y=stand_res)) +
           geom_point(shape = 1) +
-          geom_smooth(se = FALSE) +
+          geom_smooth(se = FALSE, color = "red") +
           ggtitle("Scale - Location") +
-          xlab(paste("Fitted values",")", sep = "")) +
-          ylab("Residuals") +
+          xlab(paste0("Fitted values\nlm( ", all.vars(formula)[1], " ~ ",
+                      paste(all.vars(formula)[-1], sep = " + "), " )", sep = "")) +
+          ylab(expression(sqrt("|Standardize residuals|"))) +
           theme_light()
         readline(prompt = "Press <Return> to see next plot:")
         print(p1)
