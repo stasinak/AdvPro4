@@ -14,17 +14,7 @@
 #' @field formula:Linear regression formula . 
 #' @field data: Recieved data from user. 
 #' @field dname:Data name.
-#' @method print function:print out the coefficients and coefficient names,
-#' @method plot function:the function returns two graphs.The first one contains the scaterplot of the fitted values vs the residuals.The second one returns a similar plot with the standardized residuals on  the Y-axis.
-#' @method resid function: returns the vector of residuals e. 
-#' @method pred function: returns the predicted values yˆ.
-#' @method coef function: returns the coefficients as a named vector.
-#' @method  summary function: returns the coefficients with their standard error, t-value and p-value as well as the estimate of ˆσ and the degrees of freedom in the model.
-#' @return returns an object of class linreg containing a linear regression model.
-#' @export
 #' @description The package creates a new class called "Linreg".It consists in an alternative implemantation of the linear regression algorithm.
-#'
-#' @examples linreg_mod <- linreg$new(Petal.Length~Sepal.Width+Sepal.Length, data=iris)
 linreg <-setRefClass("linreg",
    fields = list(
      formula="formula",

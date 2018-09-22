@@ -1,4 +1,4 @@
 library(testthat)
-library(AdvPro4)
+library(Linear.reg)
 
 test_check("Linear.reg")
