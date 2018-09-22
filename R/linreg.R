@@ -87,16 +87,6 @@ linreg <-setRefClass("linreg",
                                 ylab(expression(sqrt("|Standardize residuals|"))) +
                                 theme_light())
         suppressMessages(list(p1,p2))
-      }
-      resid = function(){
-        return(resid_e)
-      },
-      pred = function(){
-        return(fit_val)
-      },
-      coef = function(){
-
-        return(reg_coe)
       },
       summary = function(){
         l <- list()
