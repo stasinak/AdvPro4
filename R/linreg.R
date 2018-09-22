@@ -88,6 +88,16 @@ linreg <-setRefClass("linreg",
                                 theme_light())
         suppressMessages(list(p1,p2))
       },
+      resid = function(){
+        return(resid_e)
+      },
+      pred = function(){
+        return(fit_val)
+      },
+      coef = function(){
+
+        return(reg_coe)
+      },
       summary = function(){
         l <- list()
         m = matrix(NA,p,4)
