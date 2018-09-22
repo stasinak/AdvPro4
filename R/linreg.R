@@ -1,28 +1,37 @@
-#' Title
+#' Linear Regression
 #'
-#' @field X matrix.
-#' @field Y matrix.
-#' @field reg_coe vector.
-#' @field fit_val vector.
-#' @field resid_e vector.
-#' @field n numeric.
-#' @field p numeric.
-#' @field df numeric.
-#' @field resid_var numeric.
-#' @field var_beta matrix.
-#' @field t_val vector.
-#'
-#' @return
+#' @field X :matrix containing all the data.
+#' @field Y :vector containing response variable.
+#' @field reg_coe vector: Estimation of the regression coefficients.
+#' @field fit_val vector: Estimation of the Y values.
+#' @field resid_e vector:Estimation of the error variable.
+#' @field n numeric :Number of data.
+#' @field p numeric Number of variables.
+#' @field df numeric:Degrees of freedom.
+#' @field resid_var numeric:Estimates of the variance of the error variable.
+#' @field var_beta matrix:Estimates the variability of the beta coefficients.
+#' @field t_val vector:T-values for significance of coefficients.
+#' @field formula:Linear regression formula . 
+#' @field data: Recieved data from user. 
+#' @field dname:Data name.
+#' @method print function:print out the coefficients and coefficient names,
+#' @method plot function:the function returns two graphs.The first one contains the scaterplot of the fitted values vs the residuals.The second one returns a similar plot with the standardized residuals on  the Y-axis.
+#' @method resid function: returns the vector of residuals e. 
+#' @method pred function: returns the predicted values yˆ.
+#' @method coef function: returns the coefficients as a named vector.
+#' @method  summary function: returns the coefficients with their standard error, t-value and p-value as well as the estimate of ˆσ and the degrees of freedom in the model.
+#' @return returns an object of class linreg containing a linear regression model.
 #' @export
+#' @description The package creates a new class called "Linreg".It consists in an alternative implemantation of the linear regression algorithm.
 #'
-#' @examples
+#' @examples linreg_mod <- linreg$new(Petal.Length~Sepal.Width+Sepal.Length, data=iris)
 linreg <-setRefClass("linreg",
    fields = list(
      formula="formula",
      data = "data.frame",
      dname = "vector",
      X="matrix",
-     Y="matrix",
+     Y="vector",
      reg_coe="vector",
      fit_val="vector",
      resid_e="vector",
