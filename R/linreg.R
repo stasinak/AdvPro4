@@ -1,3 +1,4 @@
+library(magick)
 #' Linear Regression
 #'
 #' @field X :matrix containing all the data.
@@ -11,11 +12,9 @@
 #' @field resid_var numeric:Estimates of the variance of the error variable.
 #' @field var_beta matrix:Estimates the variability of the beta coefficients.
 #' @field t_val vector:T-values for significance of coefficients.
-#' @field formula:Linear regression formula .
-#' @field data: Recieved data from user.
+#' @field formula:Linear regression formula . 
+#' @field data: Recieved data from user. 
 #' @field dname:Data name.
-#' @export linreg
-#' @exportClass linreg
 #' @description The package creates a new class called "Linreg".It consists in an alternative implemantation of the linear regression algorithm.
 linreg <-setRefClass("linreg",
    fields = list(
@@ -70,23 +69,61 @@ linreg <-setRefClass("linreg",
       },
       plot = function(){
         require(ggplot2)
+        
+        linkoping_theme <-
+          theme(
+            plot.background = element_rect(fill = '#b8f5f9'),
+            plot.margin = unit(c(1,1.2,.8,1.2), "cm"),
+            panel.background = element_rect(fill = '#54f4ff'),
+            panel.grid.major = element_line(colour = "#032435", size=.35),
+            panel.grid.minor = element_line(colour = "#044566", size=.25),
+            panel.border = element_rect(colour = "#c2c8d6", fill = NA, size = 1.2),
+            axis.line = element_line(color= "#333333", size=1.2),
+            axis.text.x = element_text(color="#3a3a3a", size="11"),
+            axis.text.y = element_text(color="#3a3a3a", size="11"),
+            axis.title.x = element_text(color="Black", size="12"),
+            axis.title.y = element_text(color="Black", size="12"),
+            axis.ticks.y = element_blank(),
+            axis.ticks.x = element_line(color = "#9D9ADC", size = 0.3),
+            plot.title = element_text(color="#032435", face="bold", size="14"),
+            legend.position="bottom", legend.title = element_blank(),
+            legend.text = element_text(color="Black", size="12")
+          )
+        
         data_plot <- data.frame(fit_val, resid_e, stand_res = sqrt(abs(resid_e/sd(resid_e))))
         p1 = suppressMessages(ggplot(data_plot, aes(x=fit_val, y=resid_e)) +
                                 geom_point(shape = 1) +
-                                geom_smooth(se = FALSE, color = "red") +
+                                # geom_smooth(se = FALSE, color = "red") +
+                                # stat_summary(fun.y=mean, colour="red", geom="line") +
                                 ggtitle("Residual vs Fitted") +
                                 xlab(paste0("Fitted values\nlm( ", all.vars(formula)[1], " ~ ",
                                             paste(all.vars(formula)[-1], sep = " + "), " )", sep = "")) +
                                 ylab("Residuals") +
-                                theme_light())
+                                linkoping_theme
+                              )
+                                
         p2 = suppressMessages(ggplot(data_plot, aes(x=fit_val, y=stand_res)) +
                                 geom_point(shape = 1) +
-                                geom_smooth(se = FALSE, color = "red") +
+                                # geom_smooth(se = FALSE, color = "red") +
+                                # stat_summary(fun.y=mean, colour="red", geom="line") +
                                 ggtitle("Scale - Location") +
                                 xlab(paste0("Fitted values\nlm( ", all.vars(formula)[1], " ~ ",
                                             paste(all.vars(formula)[-1], sep = " + "), " )", sep = "")) +
                                 ylab(expression(sqrt("|Standardize residuals|"))) +
-                                theme_light())
+                                linkoping_theme
+                              )
+        
+        y_name <- all.vars(formula)[-1]
+        data_for_plot <- data[,names(data) %in% y_name]
+        if(all(unlist(lapply(data_for_plot, is.factor)))){
+          # if all elements are type of factor
+          p1 = p1 + stat_summary(fun.y=mean, colour="red", geom="line") + 
+          p2 = p2 + stat_summary(fun.y=mean, colour="red", geom="line")
+        }
+        else{
+          p1 = p1 + geom_smooth(se = FALSE, color = "red")
+          p2 = p2 + geom_smooth(se = FALSE, color = "red")
+        }
         suppressMessages(list(p1,p2))
       },
       resid = function(){
@@ -124,7 +161,7 @@ linreg <-setRefClass("linreg",
             cat(format(round(m[i,], digits = 5), width=20, justify="right", scientific = F),format(".", width=20, justify="left"),'\n')
           else
             cat(format(round(m[i,], digits = 5), width=20, justify="right", scientific = F),format(" ", width=20, justify="left"),'\n')
-
+            
         }
         cat("Residual standard error:", round(sqrt(resid_var), 3), "on", df, "degrees of freedom")
       }
