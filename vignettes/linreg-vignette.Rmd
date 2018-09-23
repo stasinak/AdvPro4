@@ -17,12 +17,17 @@ knitr::opts_chunk$set(
 ```
 
 # To install:
+
 ```{r , eval=FALSE}
 devtools::install_github("stasinak/AdvPro4")
 ```
 
+$~$
+
 # How to Use:
+
 First, you have to create an object.
+
 ```{r }
 library(Linear.reg)
 data(iris)
