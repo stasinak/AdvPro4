@@ -99,7 +99,7 @@ linreg <-setRefClass("linreg",
                                 xlab(paste0("Fitted values\nlm( ", all.vars(formula)[1], " ~ ",
                                             paste(all.vars(formula)[-1], sep = " + "), " )", sep = "")) +
                                 ylab("Residuals") +
-                                linkoping_theme
+                                linkoping_theme 
                               )
                                 
         p2 = suppressMessages(ggplot(data_plot, aes(x=fit_val, y=stand_res)) +
