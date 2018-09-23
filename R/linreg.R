@@ -117,7 +117,7 @@ linreg <-setRefClass("linreg",
         data_for_plot <- data[,names(data) %in% y_name]
         if(all(unlist(lapply(data_for_plot, is.factor)))){
           # if all elements are type of factor
-          p1 = p1 + stat_summary(fun.y=mean, colour="red", geom="line") + 
+          p1 = p1 + stat_summary(fun.y=mean, colour="red", geom="line")
           p2 = p2 + stat_summary(fun.y=mean, colour="red", geom="line")
         }
         else{
