@@ -16,11 +16,6 @@
 #' @field dname:Data name.
 #' @export linreg
 #' @exportClass linreg
-#' @exportMethod print
-#' @exportMethod plot
-#' @exportMethod resid
-#' @exportMethod coef
-#' @exportMethod summary
 #' @description The package creates a new class called "Linreg".It consists in an alternative implemantation of the linear regression algorithm.
 linreg <-setRefClass("linreg",
    fields = list(

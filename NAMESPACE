@@ -2,8 +2,3 @@
 
 export(linreg)
 exportClasses(linreg)
-exportMethods(coef)
-exportMethods(plot)
-exportMethods(print)
-exportMethods(resid)
-exportMethods(summary)
