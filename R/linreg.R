@@ -11,10 +11,17 @@
 #' @field resid_var numeric:Estimates of the variance of the error variable.
 #' @field var_beta matrix:Estimates the variability of the beta coefficients.
 #' @field t_val vector:T-values for significance of coefficients.
-#' @field formula:Linear regression formula . 
-#' @field data: Recieved data from user. 
+#' @field formula:Linear regression formula .
+#' @field data: Recieved data from user.
 #' @field dname:Data name.
-#' @export
+#' @export linreg
+#' @exportClass linreg
+#' @exportMethod print
+#' @exportMethod plot
+#' @exportMethod resid
+#' @exportMethod pred
+#' @exportMethod coef
+#' @exportMethod summary
 #' @description The package creates a new class called "Linreg".It consists in an alternative implemantation of the linear regression algorithm.
 linreg <-setRefClass("linreg",
    fields = list(
@@ -123,7 +130,7 @@ linreg <-setRefClass("linreg",
             cat(format(round(m[i,], digits = 5), width=20, justify="right", scientific = F),format(".", width=20, justify="left"),'\n')
           else
             cat(format(round(m[i,], digits = 5), width=20, justify="right", scientific = F),format(" ", width=20, justify="left"),'\n')
-            
+
         }
         cat("Residual standard error:", round(sqrt(resid_var), 3), "on", df, "degrees of freedom")
       }
