@@ -53,16 +53,7 @@ linreg_mod$print()
 #plot
 
 The plot method returns two plots.One plot with Residuals vs Fitted Values and the other one the Square of Standartized residuals vs Fitted values. 
-```{r }
-install.packages("png")
-library(png)
-readPNG('plot1.png')
 
-
-
-
-
-```
 #Resid Method
 
 resid method returns the vector of residuals e.
@@ -94,27 +85,9 @@ Summary returns the coefficients with their standard error, t-value and p-value 
 of freedom in the model.
 
 ```{r }
-
 linreg_mod$summary()
 
 ```
 
 
 
-
-
-
-
-
-
-
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
-```
-
-Also a quote using `>`:
-
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
