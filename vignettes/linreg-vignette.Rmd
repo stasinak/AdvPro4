@@ -37,43 +37,76 @@ linreg_mod$print()
 
 
 ***
+#Use the Linear Regression Model and the Functions
+The object contains a linear regression fit based on the `formula` and on the `data` the user provides.The model automatically calculates the Regressions Coefficients,the fitted values,the residuals,the degrees of freedom,the residual variance,the variance of the regression coefficients,the t-values for each coefficient.
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+After the object is created, the user can use the methods linreg.print(),linreg.plot(),linreg.resid(),linreg.pred(),linreg.coef(),linreg.summary().
 
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
+#print
+The print method prints the coefficients and coefficient names.
 
-## Vignette Info
+```{r }
+linreg_mod$print()
 
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
 
-## Styles
+```
+#plot
 
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
+The plot method returns two plots.One plot with Residuals vs Fitted Values and the other one the Square of Standartized residuals vs Fitted values. 
+```{r }
+install.packages("png")
+library(png)
+readPNG('plot1.png')
 
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
 
-## Figures
 
-The figure sizes have been customised so that you can easily put two images side-by-side. 
 
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
+
+```
+#Resid Method
+
+resid method returns the vector of residuals e.
+```{r}
+linreg_mod$resid()
+
 ```
 
-You can enable figure captions by `fig_caption: yes` in YAML:
+#Pred Method
+Pred method  returns the predicted values yˆ.
+```{r }
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
+linreg_mod$pred()
 
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
+```
 
-## More Examples
+
+#Coef Method
+Coef method  returns the coefficients as a named vector
+
+```{r }
+linreg_mod$coef()
+
+```
+
+
+#Summary method
+Summary returns the coefficients with their standard error, t-value and p-value as well as the estimate of ˆσ and the degrees
+of freedom in the model.
+
+```{r }
+
+linreg_mod$summary()
+
+```
+
+
+
+
+
+
+
+
+
 
 You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
 

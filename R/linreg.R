@@ -113,7 +113,7 @@ linreg <-setRefClass("linreg",
         cat(format("",width = 12))
         cat(format(colnames(m), width=20, justify="right"),'\n')
         for(i in 1:nrow(m)){
-          cat(format(rownames(m)[i], width = 12, justify = "left"))
+          cat(format(rownames(m)[i], width = 20, justify = "left"))
           if(m[i,4]<0.001)
             cat(format(round(m[i,], digits = 5), width=20, justify="right", scientific = F), format("***", width=20, justify="left"), '\n')
           else if(m[i,4]<0.01)
