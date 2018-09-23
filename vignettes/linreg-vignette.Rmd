@@ -53,6 +53,7 @@ linreg_mod$print()
 #plot
 
 The plot method returns two plots.One plot with Residuals vs Fitted Values and the other one the Square of Standartized residuals vs Fitted values. 
+ <img src='plot2.png'></img>
 
 #Resid Method
 
