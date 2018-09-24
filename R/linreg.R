@@ -1,4 +1,3 @@
-library(magick)
 #' Linear Regression
 #'
 #' @field X :matrix containing all the data.
@@ -117,8 +116,8 @@ linreg <-setRefClass("linreg",
         data_for_plot <- data[,names(data) %in% x_names]
         if(all(unlist(lapply(data_for_plot, is.factor)))){
           # if all x variables are factor type
-          p1 = p1 + stat_summary(fun.y=median, colour="red", geom="line")
-          p2 = p2 + stat_summary(fun.y=mean, colour="red", geom="line")
+          p1 = p1 + stat_summary(fun.y=median, colour="red", geom="line", size = 1.15)
+          p2 = p2 + stat_summary(fun.y=mean, colour="red", geom="line", size = 1.15)
         }
         else{
           p1 = p1 + geom_smooth(se = FALSE, color = "red")
