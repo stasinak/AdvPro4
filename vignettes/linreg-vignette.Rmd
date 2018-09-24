@@ -47,8 +47,6 @@ The print method prints the coefficients and coefficient names.
 
 ```{r }
 linreg_mod$print()
-
-
 ```
 #plot
 
