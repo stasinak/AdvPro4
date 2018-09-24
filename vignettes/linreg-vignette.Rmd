@@ -16,33 +16,46 @@ knitr::opts_chunk$set(
 )
 ```
 
-# To install:
+## Installation:
 
+To install the package it's necessary to download it from github.  
+The function `devtools::install_github("stasinak/AdvPro4")` will do the trick!
+
+<!-- 
 ```{r , eval=FALSE}
 devtools::install_github("stasinak/AdvPro4")
 ```
+ -->
 
 $~$
 
-# How to Use:
+## Usage:
 
-First, you have to create an object.
+This package allows the user to create objects of a new RC class, called `linreg`, that consists in an alternative way to implement the linear regression.  
+In order to create the objects, you need to input the formula specified by the user and the dataset to which it refers as parameters.
 
 ```{r }
+# Importing the library:
 library(Linear.reg)
+
+# Import a sample dataset
 data(iris)
+
+# Creating an object of class 'linreg'
 linreg_mod <- linreg$new(formula = Petal.Length~Species, data = iris)
-linreg_mod$print()
 ```
 
+## Methods
 
-***
-#Use the Linear Regression Model and the Functions
-The object contains a linear regression fit based on the `formula` and on the `data` the user provides.The model automatically calculates the Regressions Coefficients,the fitted values,the residuals,the degrees of freedom,the residual variance,the variance of the regression coefficients,the t-values for each coefficient.
+The class provides various methods that closely resemble 
+contains a linear regression fit based on the `formula` and on the `data` the user provides.The model automatically calculates the Regressions Coefficients,the fitted values,the residuals,the degrees of freedom,the residual variance,the variance of the regression coefficients,the t-values for each coefficient.
 
 After the object is created, the user can use the methods linreg.print(),linreg.plot(),linreg.resid(),linreg.pred(),linreg.coef(),linreg.summary().
 
-#print
+## Methods
+
+### print
+
 The print method prints the coefficients and coefficient names.
 
 ```{r }
@@ -51,9 +64,16 @@ linreg_mod$print()
 #plot
 
 The plot method returns two plots.One plot with Residuals vs Fitted Values and the other one the Square of Standartized residuals vs Fitted values. 
- <img src='plot2.png'></img>
 
-#Resid Method
+<!-- <img src='plot1.png'></img> -->
+<!-- <img src='plot2.png'></img> -->
+ 
+```{r}
+linreg_mod$plot()
+```
+ 
+
+# Resid Method
 
 resid method returns the vector of residuals e.
 ```{r}

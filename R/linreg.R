@@ -125,7 +125,7 @@ linreg <-setRefClass("linreg",
           p1 = p1 + geom_smooth(se = FALSE, color = "red")
           p2 = p2 + geom_smooth(se = FALSE, color = "red")
         }
-        suppressMessages(list(p1,p2))
+        suppressMessages(list(residuals_vs_fitted = p1, stand.residuals_vs_fitted = p2))
       },
       resid = function(){
         return(resid_e)
