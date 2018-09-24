@@ -54,26 +54,28 @@ After the object is created, the user can use the methods linreg.print(),linreg.
 
 ## Methods
 
-### print
+### print()
 
 The print method prints the coefficients and coefficient names.
 
 ```{r }
 linreg_mod$print()
 ```
-#plot
+### plot()
 
 The plot method returns two plots.One plot with Residuals vs Fitted Values and the other one the Square of Standartized residuals vs Fitted values. 
 
 <!-- <img src='plot1.png'></img> -->
 <!-- <img src='plot2.png'></img> -->
  
-```{r}
-linreg_mod$plot()
+```{r, message=F, warning=F, fig.width=4, fig.height=4}
+plots <- linreg_mod$plot()
+plots$residuals_vs_fitted
+plots$stand.residuals_vs_fitted
 ```
  
 
-# Resid Method
+### resid()
 
 resid method returns the vector of residuals e.
 ```{r}
@@ -81,8 +83,9 @@ linreg_mod$resid()
 
 ```
 
-#Pred Method
+### pred()
 Pred method  returns the predicted values yˆ.
+$$\hat\beta = X^TX $$
 ```{r }
 
 linreg_mod$pred()
@@ -90,7 +93,7 @@ linreg_mod$pred()
 ```
 
 
-#Coef Method
+### coef()
 Coef method  returns the coefficients as a named vector
 
 ```{r }
@@ -99,7 +102,7 @@ linreg_mod$coef()
 ```
 
 
-#Summary method
+### summary()
 Summary returns the coefficients with their standard error, t-value and p-value as well as the estimate of ˆσ and the degrees
 of freedom in the model.
 
